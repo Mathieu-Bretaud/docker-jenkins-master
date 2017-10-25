@@ -1,0 +1,16 @@
+---
+
+- name: Stop containers
+  shell: "docker-compose -f {{ jenkins_volume_path }}/working-dir/docker-compose.yml stop"
+  ignore_errors: True
+
+- name: Remove containers
+  shell: "docker-compose -f {{ jenkins_volume_path }}/working-dir/docker-compose.yml rm -f jenkins"
+  ignore_errors: True
+
+- name: Status containers
+  shell: "docker-compose -f {{ jenkins_volume_path }}/working-dir/docker-compose.yml ps"
+  register: result_status
+
+- debug: msg="{{result_status.stdout_lines}}"
+  failed_when: "'Exit' not in result_status.stdout"

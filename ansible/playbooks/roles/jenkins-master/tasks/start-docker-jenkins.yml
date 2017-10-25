@@ -1,0 +1,41 @@
+---
+- name: Create jenkins volume
+  file: path={{ jenkins_volume_path }} state=directory
+
+- name: Copy nested files
+  copy: src=working-dir dest={{ jenkins_volume_path }}/
+
+- name: Create override directory
+  file: path={{ jenkins_volume_path }}/working-dir/jenkins/override state=directory
+
+- name: Copy override jenkins files
+  template: src={{ item }} dest={{ jenkins_volume_path }}/working-dir/jenkins/override/
+  with_fileglob: override/*
+
+- name: Prepare jenkins-data Dokerfile
+  template: src=data/Dockerfile.j2 dest={{ jenkins_volume_path }}/working-dir/data/Dockerfile
+
+- name: Prepare jenkins-master Dokerfile
+  template: src=jenkins/Dockerfile.j2 dest={{ jenkins_volume_path }}/working-dir/jenkins/Dockerfile
+
+- name: Create postfix directory
+  file: path={{ jenkins_volume_path }}/working-dir/jenkins/postfix state=directory
+
+- name: Copy postfix configuration
+  template: src={{ item }} dest={{ jenkins_volume_path }}/working-dir/jenkins/postfix/
+  with_fileglob: postfix/* 
+
+- name: Prepare docker-compose file
+  template: src=docker-compose.yml dest={{ jenkins_volume_path }}/working-dir
+
+- name: Stop containers
+  shell: "docker-compose -f {{ jenkins_volume_path }}/working-dir/docker-compose.yml stop"
+  ignore_errors: True
+
+- name: Remove containers
+  shell: "docker-compose -f {{ jenkins_volume_path }}/working-dir/docker-compose.yml rm -f jenkins"
+  ignore_errors: True
+
+- name: Build and run containers
+  shell: "docker-compose -f {{ jenkins_volume_path }}/working-dir/docker-compose.yml up --build -d"
+  ignore_errors: True

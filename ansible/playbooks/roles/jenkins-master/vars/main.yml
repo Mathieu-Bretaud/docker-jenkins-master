@@ -1,0 +1,24 @@
+---
+jenkins_version: 2.60.3
+jdk_installer_version: jdk-8u92-oth-JPR
+jenkins_master_remote_java: 50003
+admin_adress: mathieu_bretaud@carrefour.com
+jenkins_volume_path: /opt/application/docker/jenkins-master
+jenkins_home: /var/jenkins_home
+timezone: "Europe/Paris"
+jenkins_master_data_image_version: 2.1
+jenkins_master_image_version:  2.1
+jenkins_master_container_name: "jenkins-master"
+jenkins_master_data_container_name: "jenkins-master-data"
+common_env:
+  - { name : 'DATASCIENCE_NO_PROXY', value: '{{ proxy_env.no_proxy }}'}
+  - { name : 'DATASCIENCE_PROXY_HOST', value: '{{ proxy_env.host }}'}
+  - { name : 'DATASCIENCE_PROXY_PORT', value: '{{ proxy_env.port }}'}
+  - { name : 'DATASCIENCE_GIT_TOKEN', value: '{{ github_token }}'}
+
+datascience_dev_users:
+  - mathieu_bretaud
+
+jenkins_directories_to_copy:
+  - { src: "{{ jenkins_volume_path }}/working-dir/data/home/workflow-libs/.", dest: "{{ jenkins_home }}/workflow-libs"}
+  - { src: "{{ jenkins_volume_path }}/working-dir/data/home/jobs/.", dest: "{{ jenkins_home }}/jobs"}

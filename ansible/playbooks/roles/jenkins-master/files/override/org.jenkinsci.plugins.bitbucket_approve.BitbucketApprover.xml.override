@@ -1,0 +1,5 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<org.jenkinsci.plugins.bitbucket__approve.BitbucketApprover_-DescriptorImpl plugin="bitbucket-approve@1.0.3">
+  <mUser>{{ bitbucket_env.user }}</mUser>
+  <mPassword>{{ bitbucket_env.password }}</mPassword>
+</org.jenkinsci.plugins.bitbucket__approve.BitbucketApprover_-DescriptorImpl>

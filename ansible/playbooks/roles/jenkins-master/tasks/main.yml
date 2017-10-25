@@ -1,0 +1,12 @@
+---
+- include: start-docker-jenkins.yml
+  tags: start-docker-jenkins
+
+- include: stop-docker-jenkins.yml
+  tags: stop-docker-jenkins
+
+- include: copy-libs-to-docker-jenkins.yml
+  tags: [start-docker-jenkins,copy-libs-to-docker-jenkins]
+
+- include: status-docker-jenkins.yml
+  tags: [start-docker-jenkins,status-docker-jenkins]

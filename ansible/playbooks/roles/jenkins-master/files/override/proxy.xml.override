@@ -1,0 +1,8 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<proxy>
+  <name>{{ proxy_env.host }}</name>
+  <port>{{ proxy_env.port }}</port>
+  <userName>{{ proxy_env.user }}</userName>
+  <noProxyHost>{{ proxy_env.no_proxy }}</noProxyHost>
+  <secretPassword>{{ proxy_env.password }}</secretPassword>
+</proxy>

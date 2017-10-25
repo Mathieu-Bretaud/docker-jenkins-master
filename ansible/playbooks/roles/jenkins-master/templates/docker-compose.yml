@@ -1,0 +1,27 @@
+version: '2'
+services:
+
+  datajenkins:
+    build:
+       context: "{{ jenkins_volume_path }}/working-dir/data"
+    image: "jenkins_master_data:{{ jenkins_master_data_image_version }}"
+    hostname: jenkins_master_data
+    volumes:
+     - "/var/jenkins_home"
+    container_name: "{{ jenkins_master_data_container_name }}"
+    restart: always
+
+  jenkins:
+    build:
+      context: "{{ jenkins_volume_path }}/working-dir/jenkins"
+    image: "jenkins_master:{{ jenkins_master_image_version }}"
+    hostname: jenkins_master
+    ports:
+      - "{{ jenkins_master_http_port }}:8080"
+      - "{{ jenkins_master_remote_java }}:50000"
+    volumes_from:
+      - "datajenkins"
+    container_name: "{{ jenkins_master_container_name }}"
+    restart: always
+    depends_on:
+      - datajenkins

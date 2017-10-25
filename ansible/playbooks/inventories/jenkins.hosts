@@ -1,0 +1,11 @@
+[all]
+Z440-DEV-1 host_ip=10.176.153.89
+
+[all:vars]
+site=datalabs
+
+[datalabs:children]
+jenkins-master
+
+[jenkins-master]
+Z440-DEV-1 host_ip=10.176.153.89

@@ -1,0 +1,4 @@
+- hosts: jenkins-master
+  environment: "{{proxy_env}}"
+  roles:
+    - {role: jenkins-master, tags: [jenkins-master] }

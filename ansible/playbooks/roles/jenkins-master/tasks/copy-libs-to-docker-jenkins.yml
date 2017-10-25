@@ -1,0 +1,11 @@
+---
+
+- name: Copy nested files
+  copy: src=working-dir dest={{ jenkins_volume_path }}/
+
+- name: Copy files
+  shell: |
+    docker cp {{ item.src }} {{ jenkins_master_container_name }}:{{ item.dest }}
+    docker exec --user root {{ jenkins_master_container_name }} bash -c "chown -R jenkins:jenkins {{ item.dest }}"
+  with_items:
+    - "{{ jenkins_directories_to_copy }}"
