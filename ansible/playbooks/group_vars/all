@@ -1,35 +1,35 @@
 ---
 proxy_env:
   user: mathieu_bretaud
-  password: Matt1991+
-  http_proxy: http://mathieu_bretaud:Matt1991+@10.54.64.5:8080
-  https_proxy: http://mathieu_bretaud:Matt1991+@10.54.64.5:8080
-  host: 10.54.64.5
+  password: *******
+  http_proxy: http://mathieu_bretaud:*******@*******:8080
+  https_proxy: http://mathieu_bretaud:*******@*******:8080
+  host: *******
   port: 8080
   no_proxy: localhost,127.0.0.0/8
-ntp_server: timesrv.edc.carrefour.com
-smtp_server: smtprelay.dcn.fr.carrefour.com
+ntp_server: *******
+smtp_server: *******
 
 bitbucket_env:
   user: mathieu_bretaud
-  password: Matt1991+
+  password: *******
 
 slack_env:
   base_url: https://data-geeks-talk.slack.com/services/hooks/jenkins-ci/
   team_domain: Data Geeks
-  token: lX8lj2wGYAR3RlqQqpPJTOFq
+  token: *******
   
 
 appl_mount_name: "appl"
-server_ip: 10.176.153.89
+server_ip: *******
 jenkins_port: 8083
 jenkins_url: "http://{{ server_ip }}:{{ jenkins_port }}"
 jenkins_master_url: "http://{{ server_ip }}:{{ jenkins_port }}"
-mailops: mathieu_bretaud@carrefour.com
-mailrun: mathieu_bretaud@carrefour.com
-maildev: mathieu_bretaud@carrefour.com
-mailsos: mathieu_bretaud@carrefour.com
-mailproj: mathieu_bretaud@carrefour.com
+mailops: *******
+mailrun: *******
+maildev: *******
+mailsos: *******
+mailproj: *******
 mailall: "{{ mailops }},{{ mailrun }},{{ maildev}},{{ mailsos }},{{ mailproj }}"
 jenkins_master_http_port: "{{ jenkins_port }}"
-github_token: 2e5ac944abf3f13560268809f0c2785d1a678fc6
+github_token: *******
